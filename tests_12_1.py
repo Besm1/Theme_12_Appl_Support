@@ -6,6 +6,7 @@ class RunnerTest(unittest.TestCase):
         rn = runner.Runner('Ипполит Матвеевич Воробьянинов')
         for i in range(10):
             rn.walk()
+        print(self.assertEqual(rn.distance, 50))
         self.assertEqual(rn.distance, 50)
 
     def test_run(self):
