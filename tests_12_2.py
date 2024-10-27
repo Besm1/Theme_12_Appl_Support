@@ -53,6 +53,12 @@ class TournamentTest(unittest.TestCase):
         self.all_results[6] = res
         self.assertEqual(res[max(res.keys())].name, 'Андрей', 'Тест 6')
 
+    def test_tour7(self):
+        # Повторяет тест 6, но с экземпляром исправленного класса турнира TournamentNew
+        res = rt.TournamentNew(90, self.Andrew, self.Husein).start()
+        self.all_results[6] = res
+        self.assertEqual(res[max(res.keys())].name, 'Андрей', 'Тест 7')
+
 
 
 if __name__ == '__main__':

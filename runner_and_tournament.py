@@ -20,6 +20,37 @@ class Runner:
             return self.name == other.name
 
 
+class TournamentNew:
+    def __init__(self, distance, *participants):
+        self.full_distance = distance
+        self.participants = list(participants)
+
+    def start(self):
+        finishers = {}
+        place = 1
+        while self.participants:
+            this_round_finishers = []       # список финишировавших на данном круге
+            for participant in self.participants:
+                participant.run()
+                if participant.distance >= self.full_distance:
+                    this_round_finishers.append(participant)    # Добавляем того, кто финишировал
+                    # finishers[place] = participant        #
+                    # place += 1                            # Закомментим неправильный код
+                    # self.participants.remove(participant) #
+
+                # Добавим свой код:
+            if this_round_finishers:    # Кто-то финишировал
+                if len(this_round_finishers) > 1:   # Если больше одного, то отсортируем по убыванию пройденной дистанции
+                    this_round_finishers = sorted(this_round_finishers, key=lambda p: p.distance, reverse=True)
+                for i in range(len(this_round_finishers)):  # Обработаем текущих финишёров:
+                    finishers[place + i] = this_round_finishers[i]      # Запишем их в общий список согласно пройденной
+                                                                        #                                    дистанции
+                    self.participants.remove(this_round_finishers[i])   # Вычеркнем из списка бегущих
+                place += len(this_round_finishers)  # Сколько мест заняли финишёры текущего круга
+
+
+        return finishers
+
 class Tournament:
     def __init__(self, distance, *participants):
         self.full_distance = distance
