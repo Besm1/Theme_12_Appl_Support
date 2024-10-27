@@ -1,4 +1,5 @@
-import runner_and_tournament as rt
+import runner_and_tournament as rt      # Оригинальная функция Tournament.start() неправильно определяет места
+# import runner_and_tournament_new as rt    # Здесь Tournament.start() исправлена
 import unittest
 
 class TournamentTest(unittest.TestCase):
@@ -52,12 +53,6 @@ class TournamentTest(unittest.TestCase):
         res = rt.Tournament(90, self.Andrew, self.Husein).start()
         self.all_results[6] = res
         self.assertEqual(res[max(res.keys())].name, 'Андрей', 'Тест 6')
-
-    def test_tour7(self):
-        # Повторяет тест 6, но с экземпляром исправленного класса турнира TournamentNew
-        res = rt.TournamentNew(90, self.Andrew, self.Husein).start()
-        self.all_results[6] = res
-        self.assertEqual(res[max(res.keys())].name, 'Андрей', 'Тест 7')
 
 
 
