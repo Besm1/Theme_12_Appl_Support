@@ -2,6 +2,8 @@ import runner
 import unittest
 
 class RunnerTest(unittest.TestCase):
+    is_frozen = False
+
     def test_walk(self):
         rn = runner.Runner('Ипполит Матвеевич Воробьянинов')
         for i in range(10):

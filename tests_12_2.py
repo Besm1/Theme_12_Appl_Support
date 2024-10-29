@@ -1,14 +1,26 @@
-import runner_and_tournament as rt      # Оригинальная функция Tournament.start() неправильно определяет места
-# import runner_and_tournament_new as rt    # Здесь Tournament.start() исправлена
+# import runner_and_tournament as rt      # Оригинальная функция Tournament.start() неправильно определяет места
+from unittest import skipIf
+
+import runner_and_tournament_new as rt    # Здесь Tournament.start() исправлена
 import unittest
 
+from runner_and_tournament import Tournament
+
+
 class TournamentTest(unittest.TestCase):
+    is_frozen = True
 
     @classmethod
     def setUpClass(self):
         super().setUpClass()
         self.all_results = {}
 
+
+    '''
+    Если декорировать метод setUp в классе, наследованном от unittest.TestCase, то ни один тест из этого класса 
+    выполняться не будет! Это проще, чем ставить skipIf() перед каждым тестом.
+    '''
+    @skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def setUp(self):
         self.Husein = rt.Runner('Усейн', 10)
         self.Andrew = rt.Runner('Андрей', 9)
