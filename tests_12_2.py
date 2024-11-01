@@ -8,7 +8,7 @@ from runner_and_tournament import Tournament
 
 
 class TournamentTest(unittest.TestCase):
-    is_frozen = True
+    is_frozen = False
 
     @classmethod
     def setUpClass(self):
@@ -68,5 +68,5 @@ class TournamentTest(unittest.TestCase):
 
 
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+# unittest.main()

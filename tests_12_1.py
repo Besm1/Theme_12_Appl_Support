@@ -1,4 +1,7 @@
-import runner
+# import runner
+import logging
+
+import rt_with_exceptions as runner
 import unittest
 
 
@@ -7,21 +10,31 @@ class RunnerTest(unittest.TestCase):
 
     @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_walk(self):
-        rn = runner.Runner('Ипполит Матвеевич Воробьянинов')
-        for i in range(10):
-            rn.walk()
-        print(self.assertEqual(rn.distance, 50))
-        self.assertEqual(rn.distance, 50)
+        try:
+            rn = runner.Runner('Ипполит Матвеевич Воробьянинов', speed=-10)
+            for i in range(10):
+                rn.walk()
+            print(self.assertEqual(rn.distance, 50))
+            self.assertEqual(rn.distance, 50)
+            logging.info('"test_walk" выполнен успешно')
+        except ValueError as e:
+            logging.info(f'Неверная скорость для Runner: {e}')
+
+
 
     @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_run(self):
-        rn = runner.Runner('Конрад Карлович Михельсон')
-        for i in range(10):
-            rn.run()
-        self.assertEqual(rn.distance, 100)
+        try:
+            rn = runner.Runner(name=3.62, speed='Конрад Карлович Михельсон')
+            for i in range(10):
+                rn.run()
+            self.assertEqual(rn.distance, 100)
+            logging.info('"test_run" выполнен успешно')
+        except TypeError as e:
+            logging.info(f'Неверный тип данных для объекта Runner: {e}')
 
     @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
-    def test_walk(self):
+    def test_tour(self):
         bender = runner.Runner('Остап Сулейман Берта Мария Бендер Бей')
         koreiko = runner.Runner("Александр Иванович Корейко")
         for i in range(10):
@@ -29,6 +42,6 @@ class RunnerTest(unittest.TestCase):
             koreiko.run()
         self.assertNotEqual(bender.distance, koreiko.distance)
 
-
-if __name__ == '__main__':
-    unittest.main()
+#
+# if __name__ == '__main__':
+#     unittest.main()
